@@ -28,6 +28,7 @@ import com.optum.admiral.yaml.exception.InvalidBooleanException;
 import com.optum.admiral.yaml.exception.InvalidEnumException;
 import com.optum.admiral.yaml.exception.PropertyNotFoundException;
 
+import javax.xml.bind.DatatypeConverter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -272,7 +273,7 @@ public class TheAdmiralWayBooter extends VerifiedBooter {
             try {
                 byte[] b = Files.readAllBytes(Paths.get(markerFile.getPath()));
                 byte[] hash = MessageDigest.getInstance("MD5").digest(b);
-                String actual = new String(hash);
+                String actual = DatatypeConverter.printHexBinary(hash);
                 if (!actual.equalsIgnoreCase(verifiedPathVariable.markerfile_md5)) {
                     throw new AdmiralConfigurationException(verifiedPathVariable.name, "Required markerfile md5 does not match: " +  verifiedPathVariable.description + " Expected md5: " + verifiedPathVariable.markerfile_md5 + "  Found md5: " + actual);
                 } else {
