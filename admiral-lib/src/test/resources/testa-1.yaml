@@ -1,0 +1,8 @@
+services:
+  test:
+    image: dockerimage:1.0.1
+    environment:
+      NAME: test1name
+      COLOR: test1color
+    env_file:
+      - ./envdata1.env

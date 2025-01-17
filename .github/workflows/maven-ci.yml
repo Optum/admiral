@@ -1,0 +1,74 @@
+name: Maven CI
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'releases/[1-9]+.[0-9]+.x'
+    paths-ignore:
+#      - '.github/**'
+      - '.gitignore'
+      - 'attribute.txt'
+      - 'CODE_OF_CONDUCT.md'
+      - 'CONTRIBUTING.md'
+      - 'INDIVIDUAL_CONTRIBUTOR_LICENSE.md'
+      - 'LICENSE'
+      - 'NOTICE.txt'
+      - '**/README.md'
+  pull_request:
+    branches:
+      - 'main'
+      - 'releases/[1-9]+.[0-9]+.x'
+    paths-ignore:
+#      - '.github/**'
+      - '.gitignore'
+      - 'attribute.txt'
+      - 'CODE_OF_CONDUCT.md'
+      - 'CONTRIBUTING.md'
+      - 'INDIVIDUAL_CONTRIBUTOR_LICENSE.md'
+      - 'LICENSE'
+      - 'NOTICE.txt'
+      - '**/README.md'
+
+env:
+  PRIMARY_JAVA_VERSION: '11'
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: ['11', '17']
+    name: Build Java - ${{ matrix.java }}
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
+      - name: Maven Prepare
+        id: maven-prepare
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+          server-id: ossrh
+          server-username: OSSRH_USERNAME
+          server-password: OSSRH_PASSWORD
+          gpg-private-key: ${{ secrets.SONATYPE_GPG_PRIVATE_KEY }}
+          gpg-passphrase: SONATYPE_GPG_PASSPHRASE
+      - name: Build Maven Project
+        if: success() && (github.event_name == 'pull_request' || (github.event_name == 'push' && matrix.java != env.PRIMARY_JAVA_VERSION))
+        run: ./mvnw --batch-mode install -D ci.build
+      - name: Build Maven Project and Deploy to Sonatype OSSRH
+        if: success() && (github.event_name == 'push' && matrix.java == env.PRIMARY_JAVA_VERSION)
+        run: ./mvnw --batch-mode deploy -D ci.deploy
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SONATYPE_GPG_PASSPHRASE: ${{ secrets.SONATYPE_GPG_PASSPHRASE }}
+      - name: Publish Test Report
+        if: always()
+        continue-on-error: true
+        uses: dorny/test-reporter@v1
+        with:
+          name: Test Report - Java ${{ matrix.java }}
+          path: '**/target/(surefire|failsafe)-reports/TEST-*.xml'
+          reporter: java-junit
