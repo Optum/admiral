@@ -1,9 +1,9 @@
-<Insert Project Name Here>
-Copyright 2024 Optum
+Admiral
+Copyright 2025 Optum
 
 Project Description:
 ====================
-<Short description of your project>
+Control your fleet of Docker containers with Admiral
 
 Author(s):
-<List the names and GitHub IDs of the original project authors>
+JohnMThayer
