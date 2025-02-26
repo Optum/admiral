@@ -7,7 +7,6 @@ import java.util.List;
 public class HealthCheckYaml {
     /**
      * This can't be called test or SnakeYaml Parser pukes.
-     * @return
      */
     private List<String> _test;
     public String x_admiral_id = null;
@@ -22,7 +21,6 @@ public class HealthCheckYaml {
 
     /**
      * This can't be called getTest() or SnakeYaml Parser pukes.
-     * @return
      */
     public List<String> getArgs() {
         return _test;
@@ -30,7 +28,6 @@ public class HealthCheckYaml {
 
     /**
      * This is what SnakeYaml Parser calls to set "test:" as either a list or a string.
-     * @return
      */
     public void setTest(Object o) {
         if (o instanceof String) {

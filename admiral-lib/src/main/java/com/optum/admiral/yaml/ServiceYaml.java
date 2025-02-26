@@ -157,7 +157,6 @@ public class ServiceYaml implements ServiceYamlTweakableSupplier {
 
     /**
      * This is invoked by SnakeParser with an Object so that we can handle both type cases.
-     * @return
      */
     public void setEnvironment(Object o) {
         if (o instanceof List) {
