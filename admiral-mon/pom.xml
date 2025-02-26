@@ -12,6 +12,8 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
+    <name>admiral-mon</name>
+
     <dependencies>
         <dependency>
             <groupId>commons-cli</groupId>
