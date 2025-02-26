@@ -12,6 +12,8 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
+    <name>admiral-shell</name>
+
     <dependencies>
         <dependency>
             <groupId>org.jline</groupId>

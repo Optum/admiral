@@ -12,6 +12,8 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
+    <name>admiral-lib</name>
+
     <dependencies>
         <dependency>
             <groupId>com.github.docker-java</groupId>
