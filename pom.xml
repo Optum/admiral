@@ -6,7 +6,7 @@
 
     <groupId>com.optum.admiral</groupId>
     <artifactId>admiral</artifactId>
-    <version>5.0.X-SNAPSHOT</version>
+    <version>6.0.X-SNAPSHOT</version>
     <name>admiral</name>
     <description>Admiral</description>
     <packaging>pom</packaging>
