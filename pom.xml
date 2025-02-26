@@ -6,7 +6,7 @@
 
     <groupId>com.optum.admiral</groupId>
     <artifactId>admiral</artifactId>
-    <version>5.0.X-SNAPSHOT</version>
+    <version>6.0.X-SNAPSHOT</version>
     <name>admiral</name>
     <description>Admiral</description>
     <packaging>pom</packaging>
@@ -298,6 +298,22 @@
                     <includes>
                         <include>**/*Spec.*</include>
                     </includes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <release>${java.version}</release>
                 </configuration>
             </plugin>
 
