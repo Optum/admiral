@@ -31,7 +31,7 @@ on:
       - '**/README.md'
 
 env:
-  PRIMARY_JAVA_VERSION: '11'
+  PRIMARY_JAVA_VERSION: '17'
 
 jobs:
 
@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: ['11', '17']
+        java: ['17']
     name: Build Java - ${{ matrix.java }}
     steps:
       - name: Checkout Source Code
