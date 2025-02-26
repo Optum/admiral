@@ -65,6 +65,8 @@
         <groovy-eclipse-batch.version>2.4.21-01</groovy-eclipse-batch.version>
         <groovy-eclipse-compiler.version>2.9.2-01</groovy-eclipse-compiler.version>
 
+        <java.version>17</java.version>
+
         <!-- PLUGIN PROPERTY OVERRIDES -->
         <flatten.mode>ossrh</flatten.mode> <!-- flatten-maven-plugin -->
     </properties>
@@ -238,8 +240,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <release>${java.version}</release>
                 </configuration>
                 <executions>
                     <execution>
@@ -297,22 +298,6 @@
                     <includes>
                         <include>**/*Spec.*</include>
                     </includes>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <release>${java.version}</release>
                 </configuration>
             </plugin>
 
